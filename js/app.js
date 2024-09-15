@@ -29,28 +29,25 @@ $(document).ready(function () {
     link.click();
   });
 
-  document
-    .getElementById("download-cv1")
-    .addEventListener("click", function () {
-      const link = document.createElement("a");
-      link.href =
-        "https://drive.google.com/uc?export=download&id=1-lOUBhZadOecBZOLWWAh96XtIEWxYoSN";
-      link.download = "your-cv.pdf";
-      link.click();
-    });
+  document.getElementById("download-cv1").addEventListener("click", function () {
+    const link = document.createElement("a");
+    link.href =
+      "https://drive.google.com/uc?export=download&id=1-lOUBhZadOecBZOLWWAh96XtIEWxYoSN";
+    link.download = "your-cv.pdf";
+    link.click();
+  });
 
   // Contact form submission
-  document
-    .getElementById("contact-form")
-    .addEventListener("submit", async (e) => {
-      e.preventDefault();
+  document.getElementById("contact-form").addEventListener("submit", async (e) => {
+    e.preventDefault();
 
-      const name = document.getElementById("name").value;
-      const email = document.getElementById("email").value;
-      const subject = document.getElementById("subject").value;
-      const message = document.getElementById("message").value;
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const subject = document.getElementById("subject").value;
+    const message = document.getElementById("message").value;
 
-      const response = await fetch("http://localhost:8000/send-message", {
+    try {
+      const response = await fetch("https://portfolionezuware-1.onrender.com/send-message", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -64,7 +61,8 @@ $(document).ready(function () {
       } else {
         alert("Failed to send message.");
       }
-    });
-
-  
+    } catch (error) {
+      alert("An error occurred: " + error.message);
+    }
+  });
 });
